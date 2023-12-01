@@ -1,0 +1,95 @@
+----------------------------- 설치 코드 -----------------------------
+# 리액트 설치
+npx create-react-app disease-data-app
+
+# 라우터 설치
+npm install react-router-dom
+
+# 카카오 맵 설치
+npm install react-kakao-maps-sdk
+
+# 테일윈드 설치명령어
+npm install tailwindcss
+
+# 테일윈드 설정파일 생성 명령어
+npx tailwindcss init
+
+# 차트 설치
+npm install recharts
+
+# 리액트 실행
+npm start
+
+-------------------------------------------------------------------------
+
+public > index.html에 <script>로 카카오 지도 추가
+
+
+dissCd 질병코드
+dt 예측일자
+znCd 지역코드
+lowrnkZnCd 하위 지역코드
+cnt 질병 예측진료건수  //
+risk 질병예측위험도
+dissRiskXpln 질병위험도지침  //
+
+totalCount 전체 결과수
+numOfRows 한페이지 결과 수
+pageNo 페이지 번호
+
+
+# 구조
+components
+
+
+지역 + 하위지역  // 연도 (추후엔 월까지)
+
+ #  
+질병마다 색깔 다르게 ? 
+위험도 색깔 다르게
+
+질병 통계내서 그래프
+위험도 통계내서 그래프
+
+위험도 : 1/관심 2/주의 3/경고 4/위험
+
+# 구현
+구 단위의 질병 위험도
+
+pi로 질병 통계
+
+
+지역 
+znCd 지역코드
+lowrnkZnCd 하위 지역코드
+
+서울 용산구 : znCd : 11, lowrnkZnCd : 11170
+서울 영등포구 : znCd : 11, lowrnkZnCd : 11560
+서울 강남구 : znCd : 11, lowrnkZnCd : 11680
+인천 부평구 : znCd : 28, lowrnkZnCd : 28237
+인천 미추홀구 : znCd : 28, lowrnkZnCd : 28170
+인천 계양구 : znCd : 28, lowrnkZnCd : 28240
+
+components
+	Dashboard.js
+	KakaoMap.js
+	RechartBar.js
+	RechartPie.js
+constants
+	districts.js
+	month.js
+	year.js
+service
+	api.js
+
+
+1. 지역리스트에서 지역 선택했을 때 모든 질병 나오기 ( 가능한지 모름 api 4번보내야된다는건데 )
+2. 지도 웬만큼 축소해서 선정한 6개 지역 질병코드에 따라 위험도 출력
+
+# 국민건강 알람서비스
+ http://210.178.135.37/selectSigunguInfo.do  
+
+# 지도 참고
+https://velog.io/@wlwl99/React-Kakao-Map-SDK-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+https://hayley-0616.tistory.com/38
+
