@@ -66,8 +66,8 @@ lowrnkZnCd 하위 지역코드
 서울 용산구 : znCd : 11, lowrnkZnCd : 11170
 서울 영등포구 : znCd : 11, lowrnkZnCd : 11560
 서울 강남구 : znCd : 11, lowrnkZnCd : 11680
-인천 부평구 : znCd : 28, lowrnkZnCd : 28237
 인천 미추홀구 : znCd : 28, lowrnkZnCd : 28170
+인천 부평구 : znCd : 28, lowrnkZnCd : 28237
 인천 계양구 : znCd : 28, lowrnkZnCd : 28240
 
 components
@@ -93,3 +93,4 @@ service
 https://velog.io/@wlwl99/React-Kakao-Map-SDK-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
 https://hayley-0616.tistory.com/38
 
+ xnum : "126.99049", ynum : "37.532527 (세로)

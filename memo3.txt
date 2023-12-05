@@ -1,0 +1,10 @@
+accidents는 Dashboard에서 가져온 아이템
+dissCd , dt, znCd, lowrnkZncd, cnt, risk
+
+districtList, cardList 는 App.js에서 map()
+
+
+#00A5B3
+#63A600
+#FF9700
+#EE4617
