@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { getPublicData } from '../service/api';
-import Table from './Table';
-import TheadterLocation from './KakaoMap';
+import KakaoMap from './KakaoMap';
+import RechartBar from './RechartBar';
+import RechartPie from './RechartPie';
+import { CODES } from '../service/api';
 
-export default function Dashboard({ districtId, card }) {
+
+export default function Dashboard({ disId, card }) {
   // 매개 변수
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,10 +23,10 @@ export default function Dashboard({ districtId, card }) {
       setIsLoaded(false);
       setError(null);
 
-      const data = await getPublicData(districtId, card);
+      const data = await getPublicData(disId, card);
 
       setAccidents(data.response.body.items);
-      setAccidentCount(data.response.body.items.totalCount);
+      setAccidentCount(data.response.body.totalCount);
       console.log(data);
 
 
@@ -36,7 +39,7 @@ export default function Dashboard({ districtId, card }) {
 
   useEffect(() => {
     fetchData();
-  }, [districtId, card])
+  }, [disId, card])
 
   if (error) {
     return <p className="p-8 text-center text-red-400">{error.message}</p>
@@ -52,15 +55,34 @@ export default function Dashboard({ districtId, card }) {
 
   // 데이터를 가져오고 난뒤 접근
   // ...
+  
+
 
   
 
   return accidentCount > 0 ? (
     <>
-      <Table 
-      accidents={accidents}
-      />
-      <TheadterLocation />
+    <div>
+      <div>
+        <KakaoMap
+        accidents={accidents} />
+      </div>
+
+    <div className='grid grid-cols-1 md:grid-cols-2 py-8'>
+      <div className='w-full h-[350px]'>
+        <RechartBar 
+        accidents = {accidents}/>
+      </div>
+
+      <div>
+        <RechartPie 
+        accidents = {accidents}
+        />
+      </div>
+    </div>
+
+    </div>
+    
       
       
     </>
