@@ -8,12 +8,11 @@ const data = [
   { name: '경고', value: 25, color: '#FF9700' },
   { name: '위험', value: 25, color: '#EE4617' },
 ];
-const cx = 250;
-const cy = 200;
+const cx = 200;
+const cy = 150;
 const iR = 90; // 내부 원 지름 값 낮을수록 내부 원 좁아짐
 const oR = 100; // 바늘 길이
-const value = 12.5; // 0~100 바늘 표시 위치
-const color = '#00A5B3';
+const value = 37.5; // 0~100 바늘 표시 위치
 
 
 
@@ -39,9 +38,10 @@ const needle = (value, data, cx, cy, iR, oR, color) => {
 
 
   return [
-    <circle cx={x0} cy={y0} r={r} fill={color} stroke="none" />,
-    <circle cx={x0} cy={y0} r={r+30} fill={color} stroke="none" />,
+    <circle cx={x0} cy={y0} r={r+30} fill={color} stroke="none"/>,
     <path d={`M${xba} ${yba}L${xbb} ${ybb} L${xp} ${yp} L${xba} ${yba}`} stroke="#none" fill={color} />,
+    <p> 123456</p>
+
   ];
 };
 
@@ -51,9 +51,7 @@ let month = today.getMonth() + 1; // 현재 월
 let date = today.getDate(); // 현재 날짜
 let finalDate = `${year}` + month+date;
 
-export default function RechartPie ({accidents, color, value}) {
-  // const [color, setColor] = useState('#00A5B3');
-  // const [value, setValue] = useState(12.5);
+export default function RechartPie ({accidents, guname}) {
   
   if(finalDate.length == 7 ){
     return finalDate = `${year}` + `${month}` + 0 +`${date}`;
@@ -79,7 +77,7 @@ export default function RechartPie ({accidents, color, value}) {
       
       function isRisk() {
         let color1 = ['#00A5B3','#63A600','#FF9700','#EE4617'];
-        let value1 = [12.5, 37.5, 62.5, 87.5];
+        let value1 = ['관심', '주의', '경고', '위험'];
 
         for(let i=0; i<data1.length; i++){
           if(data1[i].risk == 1) {
@@ -93,17 +91,41 @@ export default function RechartPie ({accidents, color, value}) {
 
           } else {
             return data1[i].color = color1[3], data1[i].value=value1[3];
-
+            
           }
         }
      }  
+     function dissName() {
+      for(let i=0; i<data1.length; i++) {
+        if(data1[i].dissCd == 1){
+          return data1[i].disName = '감기'
+        } else if (data1[i].dissCd == 2) {
+          return data1[i].disName = '눈병'
+        } else if (data1[i].dissCd == 3) {
+          return data1[i].disName = '식중독'
+        } else return data1[i].disName = '천식';
+      }
+     }
 
-      console.log(data1)
-      console.log(isRisk())
+      console.log(data1[1])
+      // console.log(isRisk())
+      console.log(dissName())
+
 
   
     return (
-      <PieChart width={400} height={500}>
+      <>
+      <div className='relative'>
+        <p className='absolute top-24 left-20 text-sm text-[#00A5B3]'>관심</p>
+        <p className='absolute top-8 left-36 text-sm text-[#63A600]'>주의</p>
+        <p className='absolute top-8 left-60 text-sm text-[#FF9700]'>경고</p>
+        <p className='absolute top-24 right-32 text-sm text-[#EE4617]'>위험</p>
+        <div className='absolute top-56 left-4 text-2xl font-bold text-[#666666]'>
+          <p className='pl-4'> {data1[0].name}의 {}는 
+          <span className='text-[#63A600]'> {data1[0].value}</span>단계입니다.</p>
+        </div>
+      </div>
+      <PieChart width={600} height={500}>
         <Pie
           dataKey="value"
           startAngle={180}
@@ -115,13 +137,15 @@ export default function RechartPie ({accidents, color, value}) {
           outerRadius={oR}
           fill="#8884d8"
           stroke="none"
+          
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
-        {needle(value, data, cx, cy, iR, oR, color)} {/* 여기서 color > 바늘색깔 */}
+        {needle(value, data, cx, cy, iR, oR, '#63A600')} {/* 여기서 color > 바늘색깔 */}
       </PieChart>
+      </>
     );
   
 }

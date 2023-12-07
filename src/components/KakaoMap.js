@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { DISTRICTS } from '../constants/districts';
 
 
-export default function KakaoMap ({ accidents }) {
+export default function KakaoMap ({ accidents, guname }) {
 
   const [isSeoul, setIsSeoul] = useState(true);
 
+
+  
   const locations1 = [
     {title: '용산구', latlng : {lat : 37.532527, lng : 126.980682}, id: "d0"},
     {title: '영등포구', latlng : {lat : 37.525765194, lng : 126.896661369}, id: "d1"},
@@ -32,7 +33,6 @@ export default function KakaoMap ({ accidents }) {
 })
 
 
-  
   // 서울 지도
   const SEOUL = (
     <div className='relative h-[500px] w-full border rounded-lg'>
@@ -51,7 +51,9 @@ export default function KakaoMap ({ accidents }) {
 						src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
 						size: { width: 24, height: 35 },
 					}}
+          value={locations1.title}
 					title={loc.title}
+          onClick={({ target }) => console.log(loc.title)}
 
           />
 			))}
@@ -78,6 +80,8 @@ export default function KakaoMap ({ accidents }) {
           size: { width: 24, height: 35 },
         }}
         title={loc.title}
+        onClick={({ target }) => console.log(loc.title)}
+
 
         />
     ))}
@@ -85,9 +89,12 @@ export default function KakaoMap ({ accidents }) {
   </div>
   );
 
+
+
   return (
     <>
     {isSeoul ? SEOUL : INCHEON}
+
     </>
   )
 }

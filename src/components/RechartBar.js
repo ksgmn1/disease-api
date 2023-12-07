@@ -38,7 +38,7 @@ export default function RechartBar ({ accidents }) {
       const data = data1.map(accident => {
         return {
         구 : accident.name,
-        예측진료건수 : accident.cnt,
+        질병예측건수 : accident.cnt,
         
       }
     })
@@ -61,7 +61,7 @@ export default function RechartBar ({ accidents }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="예측진료건수" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+          <Bar dataKey="질병예측건수" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
         </BarChart>
       </ResponsiveContainer>
     );

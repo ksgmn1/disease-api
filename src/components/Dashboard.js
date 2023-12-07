@@ -6,14 +6,17 @@ import RechartPie from './RechartPie';
 import { CODES } from '../service/api';
 
 
-export default function Dashboard({ disId, card }) {
+export default function Dashboard({ disId, card}) {
   // 매개 변수
   const [error, setError] = useState(null);
+
   const [isLoaded, setIsLoaded] = useState(false);
   // 지역별 저장
   const [accidents, setAccidents] = useState([]);
   // 지역별 질병 건수
   const [accidentCount, setAccidentCount] = useState(null);
+
+  const [guname, setGuname] = useState('용산구');
 
   // key state
   console.log(accidents);
@@ -65,7 +68,9 @@ export default function Dashboard({ disId, card }) {
     <div>
       <div>
         <KakaoMap
-        accidents={accidents} />
+        accidents={accidents}
+        guname={guname}
+        />
       </div>
 
     <div className='grid grid-cols-1 md:grid-cols-2 py-8'>
@@ -74,9 +79,11 @@ export default function Dashboard({ disId, card }) {
         accidents = {accidents}/>
       </div>
 
-      <div>
+      <div className='pl-10'>
         <RechartPie 
         accidents = {accidents}
+        card = {card}
+        guname={guname}
         />
       </div>
     </div>
